@@ -1,8 +1,8 @@
-
+import {FaRegUserCircle} from 'react-icons/fa'
 import { Link } from "react-router-dom"
 const Navbar = () => {
   return (
-    <div>
+    <div className='relative'>
     <nav className="bg-Emerald-900 border-gray-700" style={{boxShadow:'1px 1px 5px black'}}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
   
@@ -15,32 +15,38 @@ const Navbar = () => {
         <div className="hidden  w-screen md:flex justify-between items-center " id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
             <li>
-              <Link to="#" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">Home</Link>
+              <Link to="/" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">Home</Link>
             </li>
             <li>
-              <Link to="#" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">About</Link>
+              <Link to="/products" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Products</Link>
             </li>
             <li>
-              <Link to="#" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Services</Link>
+              <Link to="/addproducts" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Add Products</Link>
             </li>
             <li>
-              <Link to="#" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Pricing</Link>
+              <Link to="/updateproducts" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Update Products</Link>
             </li>
             <li>
-              <Link to="#" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Contact</Link>
+              <Link to="/contact" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0 ">Contact</Link>
             </li>
           </ul>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
           <li>
-             <button type="button" className="text-white border hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
-                <Link to="#" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">Login</Link>
-            </button>
+            
+                <Link to="/profile" className="block py-2 pl-3 pr-4 text-white text-4xl hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+             <FaRegUserCircle />
+                </Link>
+           
              
             </li>
             <li>
-             <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
-                <Link to="#" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">Sign Up</Link>
-            </button>
+    
+                <Link to="/logout" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 md:hover:text-red-500  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                        Log out
+                    </button>
+                </Link>
+            
              
             </li>
            
