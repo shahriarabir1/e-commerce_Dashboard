@@ -8,18 +8,21 @@ import UpdateProducts from "./components/UpdateProducts"
 import Contact from "./components/Contact"
 import Profile from "./components/Profile"
 import SignUp from "./components/SignUp"
-
+import PrivateComponents from "./components/PrivateComponents"
 function App() {
   return (
     <>
     <Navbar/>
     <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route element={<PrivateComponents/>}>
+        <Route path="/" element={<Home/>}/>
       <Route path="/products" element={<Products/>}/>
       <Route path="/addproducts" element={<AddProducts/>}/>
       <Route path="/updateproducts" element={<UpdateProducts/>}/>
       <Route path="/contact" element={<Contact/>}/>
       <Route path="/profile" element={<Profile/>}/>
+      </Route>
+      
       <Route path="/signup" element={<SignUp/>}/>
     </Routes>
     <Footers/>

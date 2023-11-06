@@ -6,6 +6,8 @@ const cors = require("cors");
 
 //middleware import
 const userRouter = require("./Routers/userRouter");
+const { notfoundHandler, errorHandler } = require("./error/error");
+
 //configuration
 dotenv.config();
 const app = express();
@@ -23,7 +25,9 @@ mongoose
   .catch((err) => {
     console.log(`There is an connection error ${err}`);
   });
-
+//error handler
+app.use(notfoundHandler);
+app.use(errorHandler);
 //listen port
 app.listen(process.env.PORT, () => {
   console.log(`App is running at ${process.env.PORT} port`);

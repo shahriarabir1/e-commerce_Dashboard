@@ -1,6 +1,11 @@
 import {FaRegUserCircle} from 'react-icons/fa'
 import { Link } from "react-router-dom"
 const Navbar = () => {
+  const auth=localStorage.getItem('user');
+  const handleLogout=()=>{
+    localStorage.clear();
+    location.reload();
+  }
   return (
     <div className='relative'>
     <nav className="bg-Emerald-900 border-gray-700" style={{boxShadow:'1px 1px 5px black'}}>
@@ -31,24 +36,30 @@ const Navbar = () => {
             </li>
           </ul>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-          <li>
+          
+      
             
-                <Link to="/profile" className="block py-2 pl-3 pr-4 text-white text-4xl hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+           <li>{auth?(
+            <div className='flex'>
+              <Link to="/profile" className="block mr-5 py-2 pl-3 pr-4 text-white text-4xl hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
              <FaRegUserCircle />
-                </Link>
-           
-             
-            </li>
-            <li>
-    
+                </Link> 
                 <Link to="/logout" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
-                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 md:hover:text-red-500  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 md:hover:text-red-500  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0" onClick={handleLogout}>
                         Log out
                     </button>
                 </Link>
+            </div>
+               
+           ):(
+                <Link to="/signup" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 md:hover:text-red-500  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                        Sign UP
+                    </button>
+                </Link>
+            )} </li>
+          
             
-             
-            </li>
            
             
           </ul>
