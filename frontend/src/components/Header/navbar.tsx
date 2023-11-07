@@ -52,11 +52,18 @@ const Navbar = () => {
             </div>
                
            ):(
-                <Link to="/signup" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
-                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 md:hover:text-red-500  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
-                        Sign UP
-                    </button>
-                </Link>
+                <div className='flex'>
+                  <Link to="/login" className="block py-2 pl-3 pr-4 mr-5 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+                      <button type="button" className="text-white border  hover:bg-blue-800 md:hover:text-black  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                          Log in
+                      </button>
+                  </Link>
+                  <Link to="/signup" className="block py-2 pl-3 pr-4 text-white  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-300 md:p-0" aria-current="page">
+                      <button type="button" className="text-white bg-blue-700 hover:bg-blue-400 md:hover:text-black  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                          Sign up
+                      </button>
+                  </Link>
+                </div>
             )} </li>
           
             
