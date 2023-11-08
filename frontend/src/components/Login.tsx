@@ -24,8 +24,12 @@ const Login = () => {
       });
 
       const data = await result.json();
+
       if (data.email) {
-        localStorage.setItem("user", JSON.stringify(data.email));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ email: data.email, firstname: data.firstname })
+        );
         alert("Login successfull");
         navigate("/");
         location.reload();

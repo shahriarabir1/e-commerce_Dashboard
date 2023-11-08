@@ -7,6 +7,7 @@ const cors = require("cors");
 //middleware import
 const userRouter = require("./Routers/userRouter");
 const loginRouter = require("./Routers/loginRouter");
+const productRouter = require("./Routers/productRouter");
 const { notfoundHandler, errorHandler } = require("./error/error");
 
 //configuration
@@ -18,6 +19,7 @@ app.use(cors());
 //router call
 app.use("/signup", userRouter);
 app.use("/login", loginRouter);
+app.use("/add_product", productRouter);
 //connected to database
 mongoose
   .connect(process.env.MONGO_CON)
