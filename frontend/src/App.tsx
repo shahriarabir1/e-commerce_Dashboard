@@ -3,7 +3,7 @@ import {Routes,Route} from 'react-router-dom'
 import Navbar from "./components/Header/navbar"
 import Footers from './components/Footer/Footer'
 import Products from "./components/Products"
-import AddProducts from "./AddProducts"
+import AddProducts from "./components/AddProducts"
 import UpdateProducts from "./components/UpdateProducts"
 import Contact from "./components/Contact"
 import Profile from "./components/Profile"
