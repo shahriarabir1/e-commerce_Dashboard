@@ -28,7 +28,11 @@ const Login = () => {
       if (data.email) {
         localStorage.setItem(
           "user",
-          JSON.stringify({ email: data.email, firstname: data.firstname })
+          JSON.stringify({
+            email: data.email,
+            firstname: data.firstname,
+            id: data._id,
+          })
         );
         alert("Login successfull");
         navigate("/");

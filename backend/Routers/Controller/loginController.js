@@ -1,7 +1,7 @@
 const user = require("../../Schemas/userSchema");
 const loginController = async (req, res) => {
   if (req.body.email && req.body.password) {
-    let User = await user.findOne(req.body).select("email firstname");
+    let User = await user.findOne(req.body).select("_id email firstname");
     if (User) {
       res.send(User);
     } else {
