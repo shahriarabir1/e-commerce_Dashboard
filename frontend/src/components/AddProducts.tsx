@@ -8,12 +8,18 @@ const AddProducts = () => {
     company: "",
   });
 
+  const [error, setError] = useState(false);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (!data.name || !data.price || !data.type || !data.company) {
+      setError(true);
+      return false;
+    }
     const data2: any = localStorage.getItem("user");
     const dataParse = JSON.parse(data2);
     const final = {
@@ -21,7 +27,7 @@ const AddProducts = () => {
       userId: dataParse.id,
     };
 
-    const result = await fetch("http://localhost:3000/add_product", {
+    const result = await fetch("http://localhost:3000/product", {
       method: "post",
       body: JSON.stringify(final),
       headers: {
@@ -29,7 +35,7 @@ const AddProducts = () => {
       },
     });
     const dt = await result.json();
-    console.log(dt);
+
     if (dt.userId) {
       alert("Product added Succesfully");
       location.reload();
@@ -37,8 +43,10 @@ const AddProducts = () => {
       alert("Product not added");
     }
   };
+
   return (
-    <div className="flex justify-center items-center mt-10">
+    <div className="flex flex-col justify-center items-center mt-10">
+      <h1 className="text-white text-2xl font-bold">Add Product</h1>
       <form className="w-[50%]" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
@@ -56,6 +64,9 @@ const AddProducts = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
+          {error && !data.name && (
+            <span className="text-red-400">Enter a valid name</span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -73,6 +84,9 @@ const AddProducts = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
+          {error && !data.price && (
+            <span className="text-red-400">Enter a valid Price</span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -96,6 +110,9 @@ const AddProducts = () => {
             <option value="pc">PC Item</option>
             <option value="others">Other Components</option>
           </select>
+          {error && !data.type && (
+            <span className="text-red-400">Enter a valid type</span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -112,6 +129,9 @@ const AddProducts = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
+          {error && !data.company && (
+            <span className="text-red-400">Enter a valid name</span>
+          )}
         </div>
         <button
           type="submit"

@@ -1,8 +1,105 @@
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const Products = () => {
-  return (
-    <div>Products</div>
-  )
-}
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    getProduct();
+  }, []);
+  const getProduct = async () => {
+    let result: any = await fetch("http://localhost:3000/product", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    setProduct(result);
+  };
+  const handleDeleteAll = async () => {
+    const result = await fetch("http://localhost:3000/product", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-export default Products
+    if (result.status === 200) {
+      alert("Deleted Successfully");
+      location.reload();
+    } else {
+      alert("There is a problem");
+    }
+  };
+  const handleDelete = async (id: string) => {
+    let result = await fetch(`http://localhost:3000/product/${id}`, {
+      method: "delete",
+    });
+    result = await result.json();
+    if (result) {
+      alert("Deleted");
+      getProduct();
+    } else {
+      alert("There is a problem");
+    }
+  };
+  return (
+    <div className="text-white flex flex-col  items-center">
+      <h1 className="text-2xl font-bold my-5">Product List</h1>
+      <table>
+        <thead>
+          <tr>
+            <td className="border border-solid  p-5 font-bold">Serial No.</td>
+            <td className="border border-solid p-5 font-bold">Product Name</td>
+            <td className="border border-solid p-5 font-bold">Category</td>
+            <td className="border border-solid p-5 font-bold">Company</td>
+            <td className="border border-solid p-5 font-bold">Price</td>
+            <td className="border border-solid p-5 font-bold">
+              <button onClick={handleDeleteAll} className="text-red-500">
+                X
+              </button>
+            </td>
+            <td className="border border-solid p-5 font-bold">
+              Do you want to update?
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          {product.length > 0
+            ? product.map((item: any, index) => {
+                console.log(item);
+                return (
+                  <tr key={index}>
+                    <td className="border border-solid p-5 font-bold">
+                      {index + 1}
+                    </td>
+                    <td className="border border-solid p-5 ">{item.name}</td>
+                    <td className="border border-solid p-5 ">{item.type}</td>
+                    <td className="border border-solid p-5 ">{item.company}</td>
+                    <td className="border border-solid p-5">{item.price}</td>
+                    <td className="border border-solid p-5 ">
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="text-red-500"
+                      >
+                        X
+                      </button>
+                    </td>
+                    <td className="border border-solid p-5 text-center">
+                      <Link
+                        to={"/updateproducts/" + item._id}
+                        className="bg-green-500 p-3 rounded-lg transition duration-500 ease-in-out hover:bg-green-900"
+                      >
+                        Update
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })
+            : null}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default Products;

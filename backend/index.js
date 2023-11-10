@@ -1,38 +1,40 @@
 //module import
-const express = require("express")
-const mongoose = require("mongoose")
-const dotenv = require("dotenv")
-const cors = require("cors")
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
 //middleware import
-const userRouter = require("./Routers/userRouter")
-const loginRouter = require("./Routers/loginRouter")
-const productRouter = require("./Routers/productRouter")
-const { notfoundHandler, errorHandler } = require("./error/error")
+const userRouter = require("./Routers/userRouter");
+const loginRouter = require("./Routers/loginRouter");
+const ProductRouter = require("./Routers/productRouter");
+
+const { notfoundHandler, errorHandler } = require("./error/error");
 
 //configuration
-dotenv.config()
-const app = express()
-app.use(express.json())
-app.use(cors())
+dotenv.config();
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 //router call
-app.use("/signup", userRouter)
-app.use("/login", loginRouter)
-app.use("/add_product", productRouter)
+app.use("/signup", userRouter);
+app.use("/login", loginRouter);
+app.use("/product", ProductRouter);
+
 //connected to database
 mongoose
   .connect(process.env.MONGO_CON)
   .then(() => {
-    console.log("Connected to Database")
+    console.log("Connected to Database");
   })
   .catch((err) => {
-    console.log(`There is an connection error ${err}`)
-  })
+    console.log(`There is an connection error ${err}`);
+  });
 //error handler
-app.use(notfoundHandler)
-app.use(errorHandler)
+app.use(notfoundHandler);
+app.use(errorHandler);
 //listen port
 app.listen(process.env.PORT, () => {
-  console.log(`App is running at ${process.env.PORT} port`)
-})
+  console.log(`App is running at ${process.env.PORT} port`);
+});
