@@ -24,14 +24,16 @@ const Login = () => {
       });
 
       const data = await result.json();
+      console.log(data);
 
-      if (data.email) {
+      if (data.token) {
         localStorage.setItem(
           "user",
           JSON.stringify({
-            email: data.email,
-            firstname: data.firstname,
-            id: data._id,
+            email: data.User.email,
+            firstname: data.User.firstname,
+            id: data.User._id,
+            token: data.token,
           })
         );
         alert("Login successfull");

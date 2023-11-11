@@ -7,9 +7,13 @@ const Products = () => {
   }, []);
   const [key, setKey] = useState("");
   const getProduct = async () => {
+    const token: any = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : null;
     let result: any = await fetch("http://localhost:3000/product", {
       method: "get",
       headers: {
+        Authorization: JSON.parse(token),
         "Content-Type": "application/json",
       },
     });
@@ -55,6 +59,7 @@ const Products = () => {
       },
     });
     const data = await result.json();
+    setProduct(data);
   };
   return (
     <div className="text-white flex flex-col  items-center">
@@ -93,38 +98,43 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          {product.length > 0
-            ? product.map((item: any, index) => {
-                console.log(item);
-                return (
-                  <tr key={index}>
-                    <td className="border border-solid p-5 font-bold">
-                      {index + 1}
-                    </td>
-                    <td className="border border-solid p-5 ">{item.name}</td>
-                    <td className="border border-solid p-5 ">{item.type}</td>
-                    <td className="border border-solid p-5 ">{item.company}</td>
-                    <td className="border border-solid p-5">{item.price}</td>
-                    <td className="border border-solid p-5 ">
-                      <button
-                        onClick={() => handleDelete(item._id)}
-                        className="text-red-500"
-                      >
-                        X
-                      </button>
-                    </td>
-                    <td className="border border-solid p-5 text-center">
-                      <Link
-                        to={"/updateproducts/" + item._id}
-                        className="bg-green-500 p-3 rounded-lg transition duration-500 ease-in-out hover:bg-green-900"
-                      >
-                        Update
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })
-            : null}
+          {product.length > 0 ? (
+            product.map((item: any, index) => {
+              return (
+                <tr key={index}>
+                  <td className="border border-solid p-5 font-bold">
+                    {index + 1}
+                  </td>
+                  <td className="border border-solid p-5 ">{item.name}</td>
+                  <td className="border border-solid p-5 ">{item.type}</td>
+                  <td className="border border-solid p-5 ">{item.company}</td>
+                  <td className="border border-solid p-5">{item.price}</td>
+                  <td className="border border-solid p-5 ">
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="text-red-500"
+                    >
+                      X
+                    </button>
+                  </td>
+                  <td className="border border-solid p-5 text-center">
+                    <Link
+                      to={"/updateproducts/" + item._id}
+                      className="bg-green-500 p-3 rounded-lg transition duration-500 ease-in-out hover:bg-green-900"
+                    >
+                      Update
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td className="text-2xl font-bold relative left-[400px] mt-10">
+                No Result Found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
