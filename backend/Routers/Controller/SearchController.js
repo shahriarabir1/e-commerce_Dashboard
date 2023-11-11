@@ -1,5 +1,5 @@
 const products = require("../../Schemas/productSchema");
-const {verifyToken}=require('./VerifyToken')
+const { verifyToken } = require("./VerifyToken");
 const SearchController = async (req, res) => {
   let result = await products.find({
     $or: [
