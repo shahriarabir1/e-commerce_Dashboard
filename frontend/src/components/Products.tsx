@@ -55,7 +55,6 @@ const Products = () => {
       },
     });
     const data = await result.json();
-  
   };
   return (
     <div className="text-white flex flex-col  items-center">
