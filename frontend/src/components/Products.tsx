@@ -7,14 +7,10 @@ const Products = () => {
   }, []);
   const [key, setKey] = useState("");
   const getProduct = async () => {
-    const user: any = localStorage.getItem("user")
-      ? localStorage.getItem("user")
-      : null;
-
     let result: any = await fetch("http://localhost:3000/product", {
       method: "get",
       headers: {
-        Authorization: `bearer${JSON.parse(user).token}`,
+        "Content-Type": "application/json",
       },
     });
     result = await result.json();
