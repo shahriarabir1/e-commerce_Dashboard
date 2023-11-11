@@ -5,6 +5,7 @@ const Products = () => {
   useEffect(() => {
     getProduct();
   }, []);
+  const [key, setKey] = useState("");
   const getProduct = async () => {
     let result: any = await fetch("http://localhost:3000/product", {
       method: "get",
@@ -42,9 +43,38 @@ const Products = () => {
       alert("There is a problem");
     }
   };
+  const keyChange = (e: any) => {
+    setKey(e.target.value);
+  };
+
+  const handleSearch = async () => {
+    const result = await fetch(`http://localhost:3000/search/${key}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await result.json();
+  
+  };
   return (
     <div className="text-white flex flex-col  items-center">
       <h1 className="text-2xl font-bold my-5">Product List</h1>
+      <div className="flex mb-5">
+        <input
+          placeholder="search"
+          className="p-4 text-black  rounded-lg"
+          value={key}
+          onChange={(e) => keyChange(e)}
+          onKeyDown={handleSearch}
+        />
+        <button
+          className="ml-4 bg-green-500 px-4 rounded-lg hover:bg-green-900"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
       <table>
         <thead>
           <tr>

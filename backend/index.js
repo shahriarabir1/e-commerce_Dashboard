@@ -8,6 +8,7 @@ const cors = require("cors");
 const userRouter = require("./Routers/userRouter");
 const loginRouter = require("./Routers/loginRouter");
 const ProductRouter = require("./Routers/productRouter");
+const Search = require("./Routers/Search");
 
 const { notfoundHandler, errorHandler } = require("./error/error");
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use("/signup", userRouter);
 app.use("/login", loginRouter);
 app.use("/product", ProductRouter);
+app.use("/search", Search);
 
 //connected to database
 mongoose
